@@ -1,36 +1,77 @@
 <template>
-  <div id="app">
-    <img src="./assets/logo.png">
-    <div>
-      <p>
-        If Element is successfully added to this project, you'll see an
-        <code v-text="'<el-button>'"></code>
-        below
-      </p>
-      <el-button>el-button</el-button>
-    </div>
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
+<div id='app'>
+  <el-container>
+
+    <el-header>
+      <AppHeader/>
+    </el-header>
+
+    <el-container>
+
+        <el-aside width="200px">
+          <ShapePanel/>
+        </el-aside>
+
+        <el-main>
+          <CanvasPanel/>
+        </el-main>
+
+        <el-aside width="200px">
+          <CodeViewPanel/>
+        </el-aside>
+
+    </el-container>
+
+    <el-footer>
+      <AppFooter/>
+    </el-footer>
+
+  </el-container>
+
+</div>
+
+
 </template>
 
+
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import AppFooter from './components/AppFooter'
+import AppHeader from './components/AppHeader'
+import CodeViewPanel from './components/CodeViewPanel'
+import CanvasPanel from './components/CanvasPanel'
+import ShapePanel from './components/ShapePanel'
+
 
 export default {
   name: 'app',
-  components: {
-    HelloWorld
+  components:{
+    AppFooter,
+    AppHeader,
+    CodeViewPanel,
+    CanvasPanel,
+    ShapePanel
   }
 }
 </script>
 
 <style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+.el-aside{
   text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+}
+
+.el-main{
+  text-align: center;
+}
+
+.el-container{
+  height: 100%;
+}
+
+#app{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
 }
 </style>
