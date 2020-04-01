@@ -2,13 +2,13 @@
 <div id='app'>
   <el-container>
 
-    <el-header>
+    <el-header height="80px">
       <AppHeader/>
     </el-header>
 
     <el-container>
 
-        <el-aside width="200px">
+        <el-aside id="left" width="500px">
           <ShapePanel/>
         </el-aside>
 
@@ -16,7 +16,7 @@
           <CanvasPanel/>
         </el-main>
 
-        <el-aside width="200px">
+        <el-aside id="right">
           <CodeViewPanel/>
         </el-aside>
 
@@ -59,6 +59,10 @@ export default {
   text-align: center;
 }
 
+.el-header{
+  align-items: center;
+}
+
 .el-main{
   text-align: center;
 }
@@ -74,4 +78,5 @@ export default {
   width: 100%;
   height: 100%;
 }
+
 </style>

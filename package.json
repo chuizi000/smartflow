@@ -10,6 +10,8 @@
   "dependencies": {
     "core-js": "^3.6.4",
     "element-ui": "^2.4.5",
+    "gojs": "^2.1.11",
+    "jsplumb": "^2.13.0",
     "vue": "^2.6.11"
   },
   "devDependencies": {
