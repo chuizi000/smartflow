@@ -1,6 +1,6 @@
 <template>
-  <div class="canvasPanel">
-    <GoDiagram :modelData="myModel()"/>
+  <div class="CanvasPanel">
+    <GoDiagram :modelData="myModel()" />
   </div>
 </template>
 
@@ -12,12 +12,10 @@ var $ = go.GraphObject.make;
 export default {
   name: "CanvasPanel",
   data() {
-    return {
-
-    };
+    return {};
   },
-  methods:{
-    myModel(){
+  methods: {
+    myModel() {
       let retModel = $(go.Model);
       // 在model的数据中, 每个节点数据的值都是由一个JS对象来表示:
       retModel.nodeDataArray = [
@@ -28,12 +26,14 @@ export default {
       return retModel;
     }
   },
-  components:{
+  components: {
     GoDiagram
   }
 };
 </script>
 
 <style>
-
+div.CanvasPanel {
+  height: 100%;
+}
 </style>

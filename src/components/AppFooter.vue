@@ -1,15 +1,12 @@
 <template>
-  <div class="footer">
-      this is foot
-  </div>
+  <div class="footer">this is foot</div>
 </template>
 
 <script>
 export default {
-    name:"AppFooter"
-}
+  name: "AppFooter"
+};
 </script>
 
 <style>
-
 </style>
