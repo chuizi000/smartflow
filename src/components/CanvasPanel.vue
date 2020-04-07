@@ -1,12 +1,12 @@
 <template>
   <div class="CanvasPanel">
-    <GoDiagram :modelData="myModel()" />
+    <go-diagram :modelData="myModel()"/>
   </div>
 </template>
 
 <script>
-import GoDiagram from "./GoDiagram";
-import go from "gojs/release/go-debug";
+import GoDiagram from '@/components/GoDiagram'
+import go from "gojs";
 var $ = go.GraphObject.make;
 
 export default {
@@ -18,11 +18,7 @@ export default {
     myModel() {
       let retModel = $(go.Model);
       // 在model的数据中, 每个节点数据的值都是由一个JS对象来表示:
-      retModel.nodeDataArray = [
-        { key: "Alpha" },
-        { key: "Beta" },
-        { key: "Gamma" }
-      ];
+      retModel.nodeDataArray = [];
       return retModel;
     }
   },
