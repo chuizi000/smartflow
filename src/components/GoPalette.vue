@@ -34,15 +34,15 @@ export default {
     }
     );
     myPalette.model = new go.GraphLinksModel(this.modelData);
-
+    
   }
 };
 </script>
 
 <style>
 div.GoPalette {
-  width: 100%;
-  height: 100%;
-  background-color: #12cf4bc7;
+  width: 186px;
+  height: 300px;
+  background-color: #ffffffc7;
 }
 </style>

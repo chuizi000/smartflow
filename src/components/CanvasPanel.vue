@@ -11,7 +11,7 @@ export default {
   name: "CanvasPanel",
   data() {
     return {
-      modelData:[{ text: "Step" }]
+      modelData:[]
     };
   },
   methods: {

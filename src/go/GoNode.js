@@ -79,8 +79,72 @@ export  function GetNTM () {
             makePort("R", go.Spot.Right, go.Spot.RightSide, true, true),
             makePort("B", go.Spot.Bottom, go.Spot.BottomSide, true, false)
         ));
+        NodeTemplateMap.add("define",
+        $(go.Node, "Table", nodeStyle(),
+            // the main object is a Panel that surrounds a TextBlock with a rectangular Shape
+            $(go.Panel, "Auto",
+                $(go.Shape, "Rectangle",
+                    { fill: "#282c34", stroke: "#00A9C9", strokeWidth: 3.5 },
+                    new go.Binding("figure", "figure")),
+                $(go.TextBlock, textStyle(),
+                    {
+                        margin: 8,
+                        maxSize: new go.Size(160, NaN),
+                        wrap: go.TextBlock.WrapFit,
+                    },
+                    new go.Binding("text").makeTwoWay())
+            ),
+            // four named ports, one on each side:
+            makePort("T", go.Spot.Top, go.Spot.TopSide, true, true),
+            makePort("L", go.Spot.Left, go.Spot.LeftSide, true, true),
+            makePort("R", go.Spot.Right, go.Spot.RightSide, true, true),
+            makePort("B", go.Spot.Bottom, go.Spot.BottomSide, true, true)
 
-    
+        ));
+        NodeTemplateMap.add("vartype",
+        $(go.Node, "Table", nodeStyle(),
+            // the main object is a Panel that surrounds a TextBlock with a rectangular Shape
+            $(go.Panel, "Auto",
+                $(go.Shape, "Border",
+                    { fill: "#282c34", stroke: "#00A9C9", strokeWidth: 3.5 },
+                    new go.Binding("figure", "figure")),
+                $(go.TextBlock, textStyle(),
+                    {
+                        margin: 8,
+                        maxSize: new go.Size(160, NaN),
+                        wrap: go.TextBlock.WrapFit,
+                    },
+                    new go.Binding("text").makeTwoWay())
+            ),
+            // four named ports, one on each side:
+            makePort("T", go.Spot.Top, go.Spot.TopSide, true, true),
+            makePort("L", go.Spot.Left, go.Spot.LeftSide, true, true),
+            makePort("R", go.Spot.Right, go.Spot.RightSide, true, true),
+            makePort("B", go.Spot.Bottom, go.Spot.BottomSide, true, true)
+
+        ));
+        NodeTemplateMap.add("calc",
+        $(go.Node, "Table", nodeStyle(),
+            // the main object is a Panel that surrounds a TextBlock with a rectangular Shape
+            $(go.Panel, "Auto",
+                $(go.Shape, "Parallelogram1",
+                    { fill: "#282c34", stroke: "#00A9C9", strokeWidth: 3.5 },
+                    new go.Binding("figure", "figure")),
+                $(go.TextBlock, textStyle(),
+                    {
+                        margin: 8,
+                        maxSize: new go.Size(160, NaN),
+                        wrap: go.TextBlock.WrapFit,
+                    },
+                    new go.Binding("text").makeTwoWay())
+            ),
+            // four named ports, one on each side:
+            makePort("T", go.Spot.Top, go.Spot.TopSide, true, true),
+            makePort("L", go.Spot.Left, go.Spot.LeftSide, true, true),
+            makePort("R", go.Spot.Right, go.Spot.RightSide, true, true),
+            makePort("B", go.Spot.Bottom, go.Spot.BottomSide, true, true)
+
+        ));
     return NodeTemplateMap;
 }
 

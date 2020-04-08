@@ -1,5 +1,5 @@
 <template>
-  <div class="footer">this is foot</div>
+   <el-divider content-position="right">SmartFlow - By Yuchendi</el-divider>
 </template>
 
 <script>
