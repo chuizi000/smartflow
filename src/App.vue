@@ -11,10 +11,11 @@
         </el-aside>
 
         <el-main>
-          <CanvasPanel />
+          <CanvasPanel ref="smartflow"/>
         </el-main>
 
         <el-aside id="right" width="30%">
+          <el-button type="primary" @click="compileSF" :loading="compileing">编译</el-button>
           <CodeViewPanel />
         </el-aside>
       </el-container>
@@ -42,6 +43,21 @@ export default {
     CodeViewPanel,
     CanvasPanel,
     ShapePanel
+  },
+  data:function() {
+  return {
+      compileing:false
+    };
+  },
+  methods:{
+    compileSF(){
+      console.log("xxx");
+      this.compileing = true;
+      let SFJson = this.$refs.smartflow.getJson(); 
+      console.log(SFJson);
+
+      setTimeout(()=>{this.compileing = false},1000);
+    }
   }
 };
 </script>

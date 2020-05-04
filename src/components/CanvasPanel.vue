@@ -1,6 +1,6 @@
 <template>
   <div class="CanvasPanel">
-    <go-diagram :modelData="modelData"/>
+    <go-diagram :modelData="modelData" ref='diagram'/>
   </div>
 </template>
 
@@ -15,7 +15,9 @@ export default {
     };
   },
   methods: {
-
+    getJson(){
+      return this.$refs.diagram.getJson()
+    }
   },
   components: {
     GoDiagram

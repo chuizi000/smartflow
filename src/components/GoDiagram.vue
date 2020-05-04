@@ -4,21 +4,21 @@
 
 <script>
 import go from "gojs";
-import {GetNTM,GetLT} from "../go/GoNode"
+import { GetNTM, GetLT } from "../go/GoNode";
 
 var $ = go.GraphObject.make;
 
 export default {
   name: "GoDiagram",
   props: ["modelData"],
-  mounted: function() {
+  mounted() {
     let showLinkLabel = function(e) {
       var label = e.subject.findObject("LABEL");
       if (label !== null)
         label.visible = e.subject.fromNode.data.category === "Conditional";
     };
 
-    var myDiagram = $(go.Diagram, this.$el, {
+    this.myDiagram = $(go.Diagram, this.$el, {
       grid: $(
         go.Panel,
         "Grid",
@@ -37,11 +37,11 @@ export default {
     });
 
     // when the document is modified, add a "*" to the title and enable the "Save" button
-    myDiagram.addDiagramListener("Modified", function() {
+    this.myDiagram.addDiagramListener("Modified", function() {
       var button = document.getElementById("SaveButton");
-      if (button) button.disabled = !myDiagram.isModified;
+      if (button) button.disabled = !this.myDiagram.isModified;
       var idx = document.title.indexOf("*");
-      if (myDiagram.isModified) {
+      if (this.myDiagram.isModified) {
         if (idx < 0) document.title += "*";
       } else {
         if (idx >= 0) document.title = document.title.substr(0, idx);
@@ -49,16 +49,18 @@ export default {
     });
     // helper definitions for node templates
 
-    myDiagram.model = new go.GraphLinksModel(this.modelData);
-    myDiagram.nodeTemplateMap = GetNTM()
-    myDiagram.linkTemplate = GetLT()
-    myDiagram.toolManager.linkingTool.temporaryLink.routing =
+    this.myDiagram.model = new go.GraphLinksModel(this.modelData);
+    this.myDiagram.nodeTemplateMap = GetNTM();
+    this.myDiagram.linkTemplate = GetLT();
+    this.myDiagram.toolManager.linkingTool.temporaryLink.routing =
       go.Link.Orthogonal;
-    myDiagram.toolManager.relinkingTool.temporaryLink.routing =
+    this.myDiagram.toolManager.relinkingTool.temporaryLink.routing =
       go.Link.Orthogonal;
-    
   },
   methods: {
+    getJson(){
+      return this.myDiagram.model.toJson();
+    }
   }
 };
 </script>
