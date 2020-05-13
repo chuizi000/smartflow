@@ -37,30 +37,30 @@ export default {
     return {
       activeName:['define','calc','var','vartype'],
       modelData_var:[
-        { text: "default name" },
-        { text: 'default string' ,figure:"PaperTape"},
+        { category:"var",SFclass:"name",text: "name" ,figure:"Card"},
+        { category:"var",SFclass:"CONST",text: "CONST" ,figure:"Hexagon"},
       ],
       modelData_vartype:[
-        { category:"vartype",text: "string" },
-        { category:"vartype",text: "struct" },
-        { category:"vartype",text: "bool" },
-        { category:"vartype",text: "int" },
-        { category:"vartype",text: "uint" },
-        { category:"vartype",text: "address" },
+        { category:"vartype",SFclass:"string",text: "string" },
+        { category:"vartype",SFclass:"struct",text: "struct" },
+        { category:"vartype",SFclass:"bool",text: "bool" },
+        { category:"vartype",SFclass:"int",text: "int" },
+        { category:"vartype",SFclass:"uint",text: "uint" },
+        { category:"vartype",SFclass:"address",text: "address" },
 
       ],
       modelData_define:[
-        { category:"define",text: "contract",figure:"DataStorage"},
-        { category:"define",text: "function",figure:"Cloud" },
-        { category:"define",text: "returns",figure:"Cloud" },
-        { category:"define",text: "parameters",figure:"Cloud" },
-        { category:"define",text: "internal",figure:"PrimitiveToCall" },
-        { category:"define",text: "pure",figure:"PrimitiveToCall" },
+        { category:"define",SFclass:"contract",text: "contract",figure:"DataStorage"},
+        { category:"define",SFclass:"function",text: "function",figure:"Cloud" },
+        { category:"define",SFclass:"returns",text: "returns",figure:"Cloud" },
+        { category:"define",SFclass:"parameters",text: "parameters",figure:"Cloud" },
+        { category:"define",SFclass:"internal",text: "internal",figure:"PrimitiveToCall" },
+        { category:"define",SFclass:"pure",text: "pure",figure:"PrimitiveToCall" },
       ],
       modelData_calc:[
-        { category:"calc",text: "return"},
-        { category:"calc",text: "begin",figure:"Circle"},
-        { category:"calc",text: "end",figure:"Circle"}
+        { category:"calc",SFclass: "return",text: "return"},
+        { category:"calc",SFclass: "begin",text: "begin",figure:"Circle"},
+        { category:"calc",SFclass: "end",text: "end",figure:"Circle"}
       ],
       
     };

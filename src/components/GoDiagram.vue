@@ -4,7 +4,7 @@
 
 <script>
 import go from "gojs";
-import { GetNTM, GetLT } from "../go/GoNode";
+import { GetNTM, GetLT } from "../plugins/GoNode";
 
 var $ = go.GraphObject.make;
 
@@ -37,16 +37,16 @@ export default {
     });
 
     // when the document is modified, add a "*" to the title and enable the "Save" button
-    this.myDiagram.addDiagramListener("Modified", function() {
-      var button = document.getElementById("SaveButton");
-      if (button) button.disabled = !this.myDiagram.isModified;
-      var idx = document.title.indexOf("*");
-      if (this.myDiagram.isModified) {
-        if (idx < 0) document.title += "*";
-      } else {
-        if (idx >= 0) document.title = document.title.substr(0, idx);
-      }
-    });
+    // this.myDiagram.addDiagramListener("Modified", function() {
+    //   var button = document.getElementById("SaveButton");
+    //   if (button) button.disabled = !this.myDiagram.isModified;
+    //   var idx = document.title.indexOf("*");
+    //   if (this.myDiagram.isModified) {
+    //     if (idx < 0) document.title += "*";
+    //   } else {
+    //     if (idx >= 0) document.title = document.title.substr(0, idx);
+    //   }
+    // });
     // helper definitions for node templates
 
     this.myDiagram.model = new go.GraphLinksModel(this.modelData);
@@ -60,6 +60,9 @@ export default {
   methods: {
     getJson(){
       return this.myDiagram.model.toJson();
+    },
+    loadJson(json){
+      this.myDiagram.model = go.Model.fromJson(json);
     }
   }
 };

@@ -57,7 +57,7 @@ function textStyle() {
 
 export  function GetNTM () {
     let NodeTemplateMap = new go.Map();
-    NodeTemplateMap.add("",  // the default category
+    NodeTemplateMap.add("var",  // the default category
         $(go.Node, "Table", nodeStyle(),
             // the main object is a Panel that surrounds a TextBlock with a rectangular Shape
             $(go.Panel, "Auto",

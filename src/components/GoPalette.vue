@@ -4,7 +4,7 @@
 
 <script>
 import go from "gojs";
-import {GetNTM} from "../go/GoNode"
+import {GetNTM} from "../plugins/GoNode"
 var $ = go.GraphObject.make;
 
 export default {

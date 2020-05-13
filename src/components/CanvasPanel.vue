@@ -17,6 +17,9 @@ export default {
   methods: {
     getJson(){
       return this.$refs.diagram.getJson()
+    },
+    loadJson(json){
+      this.$refs.diagram.loadJson(json)
     }
   },
   components: {

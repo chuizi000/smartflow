@@ -15,7 +15,11 @@
         </el-main>
 
         <el-aside id="right" width="30%">
+          <el-row>
+            <el-input type="textarea" v-model="json" placeholder="" autosize></el-input>
+          </el-row>
           <el-button type="primary" @click="compileSF" :loading="compileing">编译</el-button>
+          <el-button type="primary" @click="loadSF">Load</el-button>
           <CodeViewPanel />
         </el-aside>
       </el-container>
@@ -34,6 +38,7 @@ import AppHeader from "./components/AppHeader";
 import CodeViewPanel from "./components/CodeViewPanel";
 import CanvasPanel from "./components/CanvasPanel";
 import ShapePanel from "./components/ShapePanel";
+import SFcompile from '@/plugins/SFcompiler';
 
 export default {
   name: "app",
@@ -46,7 +51,8 @@ export default {
   },
   data:function() {
   return {
-      compileing:false
+      compileing:false,
+      json:"",
     };
   },
   methods:{
@@ -55,8 +61,13 @@ export default {
       this.compileing = true;
       let SFJson = this.$refs.smartflow.getJson(); 
       console.log(SFJson);
+      // print(SFJson)
+      console.log(SFcompile(SFJson));
 
       setTimeout(()=>{this.compileing = false},1000);
+    },
+    loadSF(){
+      this.$refs.smartflow.loadJson(this.json);
     }
   }
 };

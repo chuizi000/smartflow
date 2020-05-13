@@ -6,5 +6,9 @@ module.exports = {
         .use('raw-loader')
         .loader('raw-loader')
         .end()
+    },
+    devServer: {
+      host: 'localhost',
+      port: 8080
     }
   }
