@@ -42,14 +42,13 @@ export default {
       ],
       modelData_vartype:[
         { category:"vartype",SFclass:"string",text: "string" },
-        { category:"vartype",SFclass:"struct",text: "struct" },
         { category:"vartype",SFclass:"bool",text: "bool" },
         { category:"vartype",SFclass:"int",text: "int" },
-        { category:"vartype",SFclass:"uint",text: "uint" },
         { category:"vartype",SFclass:"address",text: "address" },
 
       ],
       modelData_define:[
+        { category:"define",SFclass:"struct",text: "struct" },
         { category:"define",SFclass:"contract",text: "contract",figure:"DataStorage"},
         { category:"define",SFclass:"function",text: "function",figure:"Cloud" },
         { category:"define",SFclass:"returns",text: "returns",figure:"Cloud" },
