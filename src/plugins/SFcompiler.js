@@ -3,6 +3,8 @@ class Node{
         this.category = node.category;
         this.text = node.text;
         this.SFclass = node.SFclass;
+        this.key = node.key;
+        this.loc = node.loc.split(' ').map((x)=>(parseFloat(x)));
         this.tos = [];
         this.froms = [];
     }
