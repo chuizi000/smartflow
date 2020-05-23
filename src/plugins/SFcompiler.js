@@ -37,11 +37,11 @@ function SFload(JsonString){
 
 // }
 
-// import SFgrammar from '@/plugins/SFgrammar'
+import SFgrammar from '@/plugins/SFgrammar'
 
 export default function SFcompile(JsonString){
-    let SFobject = SFload(JsonString);
-    // let SFcode = SFgrammar(SFobject);
+    let SFmap = SFload(JsonString);
+    let SFcode = SFgrammar(SFmap);
     // return SFcode; 
-    return SFobject;
+    return SFcode;
 }

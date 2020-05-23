@@ -1,6 +1,6 @@
 import err from '@/plugins/SFerror'
 
-var code = '';
+var code = [];
 
 function leafnode(root) {
     if (root.tos.length != 0) err(4);
@@ -73,19 +73,20 @@ function func_define(root) {
             return_tag = get_func_return(node)
 
         }
-        else if (node.SFclass =='begin') {
+        else if (node.SFclass == 'begin') {
             begin_node = node;
-        } 
-        else if (node.SFclass != 'name' ) err(3);
+        }
+        else if (node.SFclass != 'name') err(3);
     }
     if (vis_count > 1 || func_count > 1) err(5);
     let func = '';
+    let returns_tag = ' returns (' + return_tag + ')';
+    if (return_tag == '') returns_tag = '';
     if (funcname != 'constructor') func = 'function ';
-    let line = func + funcname + '(' + parameters + ') ' +
-        + ' ' + vis_tag + ' ' + func_tag +
-        ' returns (' + return_tag + ')';
+    let line = func + funcname + '(' + parameters + ') ' + vis_tag + ' ' + func_tag + returns_tag;
+
     code.push(line);
-    
+    console.log(line);
     return begin_node;
 }
 
@@ -97,7 +98,7 @@ function func_flow(root) {
 function ffunction(root) {
     let begin_node = func_define(root);
     if (!begin_node) err(13);
-    code.push('{'); 
+    code.push('{');
     func_flow(begin_node);
     code.push('}');
 }
@@ -152,9 +153,7 @@ function mapping(root) {
             count++;
         }
         else if (node.SFclass == 'vartype') {
-            if (node.tos.length == 0)
-                vartypes.push(node);
-            else err(4);
+            vartypes.push(node);
         } else if (node.SFclass != 'name') err(3);
     }
     if (vartypes.length != 2) err(5);
@@ -178,27 +177,33 @@ function eevent(root) {
 
 function contract(root) {
     //get contract name
-    code.push("contract " + name(root) + "{");
-
+    let conname = name(root);
+    code.push("contract " + conname + "{");
+    console.log("contract " + conname + "{");
     //define var
     for (let node of root.tos) {
         if (node.SFclass == 'vartype')
             if (node.text == 'mapping')
                 mapping(node);
-            else
-                code.push(get_vartype(node) + ';');
-        else if (node.SFclass == 'event')
-            eevent(node);
-        else if (node.SFclass == 'function')
-            ffunction(node);
+            else {
+                let line = get_vartype(node) + ';';
+                code.push(line);
+                console.log(line);
+            }
     }
-
+    for (let node of root.tos)
+        if (node.SFclass == 'event')
+            eevent(node);
+    for (let node of root.tos)
+        if (node.SFclass == 'function')
+            ffunction(node);
 
     code.push("}");
+    console.log("}");
+
 }
 
 function smartflow(map) {
-    let code = [];
     let node;
     code.push("pragma solidity ^0.4;");
 
@@ -212,7 +217,6 @@ function smartflow(map) {
 
 
 export default function grammar(map) {
-    code = '';
     let SFcode = smartflow(map);
     return SFcode;
 }
