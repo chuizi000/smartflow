@@ -15,9 +15,6 @@
         </el-main>
 
         <el-aside id="right" width="30%">
-          <el-row>
-            <el-input type="textarea" v-model="json" placeholder="" autosize></el-input>
-          </el-row>
           <el-button type="primary" @click="compileSF" :loading="compileing">编译</el-button>
           <el-button type="primary" @click="loadSF">Load</el-button>
           <CodeViewPanel />

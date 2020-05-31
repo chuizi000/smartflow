@@ -37,14 +37,13 @@
 import GoPalette from '@/components/GoPalette'
 import "gojs/extensions/Figures"
 
-export default {
+export default {  //TODO：取值 for struct . [] 删掉 加入函数调用
   name: "ShapePanel",
   data(){
     return {
       activeName: ['define','calc','var','vartype','sysfunc','sysvar'],
       modelData_define:[
         { category:"define",SFclass:"contract",text: "contract",figure:"DataStorage"},
-        { category:"define",SFclass:"struct",text: "struct" ,figure:"pentagon"},
         { category:"define",SFclass:"function",text: "function",figure:"Cloud" },
         { category:"define",SFclass:"event",text: "event",figure:"StopSign" },
 
@@ -74,6 +73,8 @@ export default {
         { category:"var",SFclass:"name",text: "name" ,figure:"Card"},
         { category:"var",SFclass:"var",text: "var" ,figure:"Terminator"},
         { category:"var",SFclass:"const",text: "CONST" ,figure:"Hexagon"},
+        { category:"var",SFclass: "func",text: "func",figure:"Parallelogram"},
+
       ],
     
       modelData_calc:[
@@ -85,15 +86,12 @@ export default {
         { category:"calc",SFclass: "2calc",text: "<=",figure:"Circle"},
         { category:"calc",SFclass: "2calc",text: "==",figure:"Circle"},
         { category:"calc",SFclass: "2calc",text: "!=",figure:"Circle"},
-        { category:"calc",SFclass: "2calc",text: "[]",figure:"Circle"},
-        { category:"calc",SFclass: "1calc",text: ".",figure:"Circle"},
         { category:"calc",SFclass: "1calc",text: ":=",figure:"Circle"},
 
 
       ],
       modelData_sysfunc:[
         { category:"sysfunc",SFclass: "emit",text: "emit",figure:"FireHazard"},
-        { category:"sysfunc",SFclass: "for",text: "for",figure:"BpnmActivityLoop"},
         { category:"sysfunc",SFclass: "if",text: "if",figure:"Decision"},
         { category:"sysfunc",SFclass: "begin",text: "begin",figure:"Border"},
         { category:"sysfunc",SFclass: "end",text: "end",figure:"Border"},
@@ -103,6 +101,8 @@ export default {
       modelData_sysvar:[
         { category:"sysvar",SFclass: "msg",text: "msg",figure:"File"},
         { category:"sysvar",SFclass: "now",text: "now",figure:"BpmnEventTimer"},
+        { category:"sysvar",SFclass: "nop",text: "NOP",figure:"Circle"},
+        
       ]
     };
   },

@@ -19,3 +19,8 @@ yarn-error.log*
 *.njsproj
 *.sln
 *.sw?
+
+src/assets/model.json
+src/assets/code.sol
+src/plugins/helloworld.json
+src/plugins/mark.json

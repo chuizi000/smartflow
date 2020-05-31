@@ -26,7 +26,7 @@ div.CodeViewPanel {
   padding-right: 5%;
   /* padding-top: 20px; */
   margin-top: 20px;
-  height: 95%;
+  height: 90%;
 }
 .CodeCard {
   height: 100%;
