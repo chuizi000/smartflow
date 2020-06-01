@@ -5,7 +5,9 @@
 <script>
 import go from "gojs";
 import { GetNTM, GetLT } from "../plugins/GoNode";
-import model from '@/assets/model';
+import model1 from '@/assets/model1';
+import model2 from '@/assets/model2';
+
 var $ = go.GraphObject.make;
 
 export default {
@@ -48,8 +50,12 @@ export default {
     getJson(){
       return this.myDiagram.model.toJson();
     },
-    loadJson(){
-      this.myDiagram.model = go.Model.fromJson(model);
+    loadJson(num){
+      if (num == 1)
+        this.myDiagram.model = go.Model.fromJson(model1);
+      else if (num==2)
+        this.myDiagram.model = go.Model.fromJson(model2);
+
     }
   }
 };

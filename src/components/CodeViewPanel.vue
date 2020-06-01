@@ -1,20 +1,23 @@
 <template>
   <div class="CodeViewPanel">
     <el-card class="CodeCard" shadow="hover">
-      <pre class="line-numbers language-js" id="CodeView"><code>{{solcode}}</code></pre>
+      <!-- <pre class="line-numbers language-js" id="CodeView"><code>{{solcode}}</code></pre> -->
+      <prism id="CodeView" language="solidity" :plugins="['line-numbers']" :code="solcode"></prism>
     </el-card>
   </div>
 </template>
 
 <script>
-import solcode from "../assets/code.sol";
+import Prism from 'vue-prismjs';
+import 'prismjs/themes/prism.css';
+  
+    
 export default {
+  components: {
+      Prism
+  },
   name: "CodeViewPanel",
-  data() {
-    return {
-      solcode
-    };
-  }
+  props: ["solcode"]
 };
 </script>
 

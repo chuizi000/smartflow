@@ -2,6 +2,25 @@ import err from '@/plugins/SFerror'
 
 var code = [];
 
+class Queue {
+    constructor() {
+        this.arr = [];
+    }
+
+    push(tmp) {
+        this.arr.push(tmp);
+    }
+
+    pop() {
+        let ret = this.arr[0];
+        this.arr = this.arr.slice(1);
+        return ret;
+    }
+    isEmpty() {
+        return this.arr.length == 0;
+    }
+}
+
 function leafnode(root) {
     if (root.tos.length != 0) err(4);
     return root.text;
@@ -90,9 +109,121 @@ function func_define(root) {
     return begin_node;
 }
 
+function calc2(root){
+    if (root.froms.length != 2) err('202');
+    let v = root.froms.sort(compare_height);
+    let ret = v[0].output+' '+root.text+' '+v[1].output
+    return ret;
+}
+
+function func(root){
+    let parameters = '';
+    for (let node of root.froms.sort(compare_height)) 
+        parameters += node.output + ', ';
+    if (parameters != '')
+        parameters = parameters.slice(0, -2);
+    let ret = root.text+'('+parameters+')'
+    return ret;
+}
+
+function emit(root) {
+    if (root.froms.length != 1) err('203');
+    code.push('emit '+root.froms[0].output+';');
+}
+
+function returnn(root) {
+    if (root.froms.length != 1) err('204');
+    code.push('return '+root.froms[0].output+';');
+}
+
+function require(root){
+    if (root.froms.length != 1) err('205');
+    code.push('require('+root.froms[0].output+');');
+}
+
+function calc1(root){
+    if (root.froms.length != 1) err('206');
+    if (root.tos.length != 1) err('207');
+    code.push(root.tos[0].text+' = '+root.froms[0].output+';');
+    return root.tos[0];
+}
+
+function nop(root){
+    for (let node of root.froms.sort(compare_height)) 
+        code.push(node.output+';');
+}
+
+function iff(root){
+    console.log('iff')
+    if (root.froms.length != 1)err('208');
+    if (!(root.tos.length == 1 && root.tos[0].SFclass=='begin')) err('209');
+    code.push('if ('+root.froms[0].output+')');
+    code.push('{');
+    let endnode = func_flow(root.tos[0]);
+    code.push('}');
+    return endnode;
+}
+
 function func_flow(root) {
-    console.log(root);
-    code.push('')
+    //console.log(root);
+    if (root.SFclass != 'begin') err('201');
+    let queue = new Queue();
+    for (let node of root.tos) {
+        if (node.type != 'null') {
+            console.log(node);
+            queue.push(node);
+            node.output = node.text;
+        }
+    }
+    console.log("@@@");
+    while (!queue.isEmpty()) {
+        let node = queue.pop();
+        console.log(node);
+        for (let next of node.tos) {
+            if (next.indegree == -1)
+                next.indegree = next.froms.length;
+            next.indegree -= 1;
+            if (next.indegree == 0) {
+                if (next.type == "value") 
+                    next.output = next.text;
+                else if (next.type == "mid") 
+                {
+                    if (next.SFclass == '2calc')
+                        next.output = calc2(next);
+                    else if (next.SFclass == 'func')
+                        next.output = func(next);
+                }
+                else if (next.type == "end") 
+                {
+                    if (next.SFclass == 'emit')
+                        emit(next);
+                    else if (next.SFclass == 'return')
+                        returnn(next);
+                    else if (next.SFclass == 'require')
+                        require(next);
+                    else if (next.SFclass == '1calc')
+                    {
+                        queue.push(calc1(next));
+                        continue;
+                    }
+                    else if (next.SFclass == 'nop')
+                        nop(next);
+                    else if (next.SFclass == 'if')
+                    {
+                        queue.push(iff(next));
+                        continue;
+                    }
+                }
+                else if (next.SFclass == 'end')
+                {
+                    return next;
+                } 
+                queue.push(next);
+            }
+        }
+        node.indegree = -1;
+    }
+
 }
 
 function ffunction(root) {
@@ -102,9 +233,6 @@ function ffunction(root) {
     func_flow(begin_node);
     code.push('}');
 }
-
-
-
 
 function get_vartype(root) {
     let varname = name(root);
@@ -178,8 +306,8 @@ function eevent(root) {
 function contract(root) {
     //get contract name
     let conname = name(root);
-    code.push("contract " + conname + "{");
-    console.log("contract " + conname + "{");
+    code.push("contract " + conname );
+    code.push("{");
     //define var
     for (let node of root.tos) {
         if (node.SFclass == 'vartype')
@@ -188,7 +316,6 @@ function contract(root) {
             else {
                 let line = get_vartype(node) + ';';
                 code.push(line);
-                console.log(line);
             }
     }
     for (let node of root.tos)
@@ -199,7 +326,6 @@ function contract(root) {
             ffunction(node);
 
     code.push("}");
-    console.log("}");
 
 }
 
@@ -217,6 +343,7 @@ function smartflow(map) {
 
 
 export default function grammar(map) {
+    code = [];
     let SFcode = smartflow(map);
     return SFcode;
 }

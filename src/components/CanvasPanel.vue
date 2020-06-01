@@ -18,8 +18,8 @@ export default {
     getJson(){
       return this.$refs.diagram.getJson()
     },
-    loadJson(json){
-      this.$refs.diagram.loadJson(json)
+    loadJson(num){
+      this.$refs.diagram.loadJson(num)
     }
   },
   components: {

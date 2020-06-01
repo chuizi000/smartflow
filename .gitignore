@@ -20,7 +20,9 @@ yarn-error.log*
 *.sln
 *.sw?
 
-src/assets/model.json
+src/assets/model1.json
+src/assets/model2.json
+
 src/assets/code.sol
 src/plugins/helloworld.json
 src/components/mark.json

@@ -16,8 +16,9 @@
 
         <el-aside id="right" width="30%">
           <el-button type="primary" @click="compileSF" :loading="compileing">编译</el-button>
-          <el-button type="primary" @click="loadSF">Load</el-button>
-          <CodeViewPanel />
+          <el-button type="primary" @click="load1">示例1</el-button>
+          <el-button type="primary" @click="load2">示例2</el-button>
+          <CodeViewPanel :solcode="code"/>
         </el-aside>
       </el-container>
 
@@ -49,7 +50,7 @@ export default {
   data:function() {
   return {
       compileing:false,
-      json:"",
+      code:"",
     };
   },
   methods:{
@@ -59,12 +60,16 @@ export default {
       let SFJson = this.$refs.smartflow.getJson(); 
       console.log(SFJson);
       // print(SFJson)
-      console.log(SFcompile(SFJson));
-
-      setTimeout(()=>{this.compileing = false},1000);
+      this.code=SFcompile(SFJson);
+      this.compileing = false;
     },
-    loadSF(){
-      this.$refs.smartflow.loadJson(this.json);
+    load1(){
+      this.code = '';
+      this.$refs.smartflow.loadJson(1);
+    },
+    load2(){
+      this.code = '';
+      this.$refs.smartflow.loadJson(2);
     }
   }
 };
